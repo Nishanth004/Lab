@@ -43,11 +43,9 @@ using namespace std;
 
 typedef pair<int, int>pii;
 
-int prims(int vertex, int edge, int graph[][3])
-{
+int prims(int vertex, int edge, int graph[][3])  {
     vector<pii> adj[vertex+1];
-    for (int i = 0; i<edge; i++)
-    {
+    for (int i = 0; i<edge; i++) {
         int u=graph[i][0];
         int v=graph[i][1];
         int wt=graph[i][2];
@@ -60,28 +58,22 @@ int prims(int vertex, int edge, int graph[][3])
     int sum=0;
     pq.push({0, 0});   		//order: weight>>vertex cz, minheap wrt weight
     
-    while(!pq.empty())
-    {
+    while(!pq.empty()) {
         auto p = pq.top(); 	// p is a pair now
         pq.pop();
         int wt=p.first; 		 //weight of edge
         int vertex=p.second; 		  //vertex value
         if(visited[vertex]==true)
-        {
             continue;
-        }
+      
         visited[vertex]=true;
         sum+=wt;
        
-
- for(auto node:adj[vertex]) 	 //for every node in adj[vertex]
-        {
+       for(auto node:adj[vertex]) {   //for every node in adj[vertex]
             int vt=node.first;
             int wt=node.second;
-	        if(visited[vt] == false)
-     	       {
+         if(visited[vt] == false)
 		        pq.push({wt, vt}); 
-	        }
         }
     }
     return sum;
@@ -102,9 +94,7 @@ int main()
     cout<<endl<<endl<<"edge      weight"<<endl;
     
     for (int i = 0; i<edges; i++)
-    {
         cout<<graph[i][0]<<"---"<<graph[i][1]<<"\t\t"<<graph[i][2]<<endl;
-    }
     
     cout<<endl<<endl<<endl<<"Weight of minimum spanning tree="<<weight<<endl;
     return 0;   
@@ -123,7 +113,6 @@ using namespace std;
 #define INF 0x3f3f3f3f
 
 typedef pair<int, int> pii;
-
 int V; 
 vector<pii> *adj;
 
@@ -135,7 +124,6 @@ void addEdge(int u, int v, int w) {
 // adj[0]:{(1, 4), (7, 8)}
 // adj[1]:{(0, 4), (2, 8), (7, 11)}
 
-
 void shortestPath(int src) {
     priority_queue<pii, vector<pii>, greater<pii> > pq;
     vector<int> dist(V, INF);
@@ -143,20 +131,16 @@ void shortestPath(int src) {
     pq.push({0, src});  //order: weight>>vertex cz, minheap wrt weight
     dist[src] = 0;
 
-	
     while (!pq.empty()) {
         int vertex = pq.top().second;
         pq.pop();
-        
-        for (auto node : adj[vertex])  	//for every node in adj[vertex]
-{ 
+      
+        for (auto node : adj[vertex])  {  	//for every node in adj[vertex]
             int vt = node.first;  
             int weight = node.second;
-
-	  //if old distance is greater than new distance
-
-            if (dist[vt] > dist[vertex] + weight)  
-{ 
+          
+            if (dist[vt] > dist[vertex] + weight)  //if old distance is greater than new distance
+            {   
                 dist[vt] = dist[vertex] + weight;
                 pq.push({dist[vt], vt});
             }
@@ -172,7 +156,6 @@ int main()
 {
     V = 9;
     adj = new vector<pii>[V];
-    
     addEdge(0, 1, 4);  //vertex1, vertex2, weight
     addEdge(0, 7, 8);
     addEdge(1, 2, 8);
@@ -189,7 +172,6 @@ int main()
     addEdge(7, 8, 7);
 
     shortestPath(0);
-
     return 0;
 }
 
@@ -203,17 +185,15 @@ int main()
 using namespace std;
 
 
-int max(int a, int b) 
-{ 
-    return (a > b) ? a : b; 
+int max(int a, int b) { 
+    if (a > b) 
+      return a;
+    return b;
 }
 
-void print_array(vector<int>& result)
-{
+void print_array(vector<int>& result){
     for (int item : result)
-    {
         cout << item << "\t";
-    }
     cout << endl;
 }
 
@@ -221,13 +201,10 @@ vector<int> knapSack(int capacity, vector<int> wt, vector<int> val, int n)
 {
     vector<vector<int> > K(n + 1, vector<int>(capacity + 1));
     vector<int> items;
-    
 
     //main part
     for (int i = 0; i <= n; i++) 
-    {
-        for (int w = 0; w <= capacity; w++) 
-        {
+        for (int w = 0; w <= capacity; w++)  {
             if (i == 0 || w == 0)
                 K[i][w] = 0;
             else if (w >= wt[i - 1])
@@ -235,26 +212,22 @@ vector<int> knapSack(int capacity, vector<int> wt, vector<int> val, int n)
             else
                 K[i][w] = K[i - 1][w];
         }
-    }
+
     //K[n][capacity] has max profit now
     
     cout<<"-----------------------------\nMax profit =  "<<K[n][capacity]<<endl;
 
     int w = capacity;
     for (int i = n; i > 0 && w > 0; i--)
-    {
-        if (K[i][w] != K[i - 1][w]) 
-        {
+        if (K[i][w] != K[i - 1][w]) {
             items.push_back(i); 
             w -= wt[i - 1];
         }
-    }
     return items;
 }
 
 
-int main()
-{
+int main(){
     vector<int> profit = { 6, 10, 12, 7, 5 };
     vector<int> weight = { 3, 4, 5, 2, 1 };
     int capacity = 10;
@@ -272,4 +245,3 @@ int main()
     print_array(result);
     return 0;
 }
-
