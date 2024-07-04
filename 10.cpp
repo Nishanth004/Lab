@@ -89,6 +89,7 @@ int prims(int vertex, int edge, int graph[][3])
 }
 
 
+
 int main()
 {
     int graph[][3] = {{0, 1, 5},
@@ -108,7 +109,6 @@ int main()
     cout<<endl<<endl<<endl<<"Weight of minimum spanning tree="<<weight<<endl;
     return 0;   
 }
-
 
 
 
