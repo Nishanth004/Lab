@@ -197,6 +197,7 @@ void print_array(vector<int>& result){
     cout << endl;
 }
 
+
 vector<int> knapSack(int capacity, vector<int> wt, vector<int> val, int n)
 {
     vector<vector<int> > K(n + 1, vector<int>(capacity + 1));
